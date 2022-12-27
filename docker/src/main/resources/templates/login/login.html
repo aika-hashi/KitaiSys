@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/layout_login}">
+<head>
+  <meta charset="UTF-8"></meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- CSS読込 -->
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/css/login/login.css}">
+  <!-- JS読込 -->
+  <script th:src="@{/webjars/jquery/jquery.min.js}" defer></script>
+  <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" defer></script>
+  <title>ログイン</title>
+</head>
+<body >
+ <!-- ヘッダー -->
+  <div layout:replace="~{layout/header_login::header}"></div><div layout:fragment="content">
+  <div class="text-center">
+    <form method="post" th:action="@{/login}" class="form-login" th:object="${signupForm}"  >
+     <p th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null"
+        th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+        class="text-danger">
+        ログインエラーメッセージ
+      </p>
+       <!-- ログインID -->
+       <div class="form-group" align="center">   
+        <label for="loginId" class="sr-only">loginId</label>
+        <input type="text" class="form-control" placeholder="ログインID" name="loginId"/>
+      </div>     
+      <!-- パスワード -->
+      <div class="form-group" align="center">
+        <label for="password" class="sr-only">password</label>
+        <input type="text" class="form-control" placeholder="パスワード" name="password"/>
+      </div>
+      
+      
+      
+      <input type="submit" value="ログイン" class="btn btn-primary"/>
+    </form>
+    <a th:href="@{/user/signup}">新規登録はこちら</a>
+  </div>
+  </div>
+</body>
+</html>

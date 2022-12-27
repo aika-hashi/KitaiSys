@@ -1,0 +1,39 @@
+INSERT INTO  employee 
+SELECT * FROM(VALUES('1', 'Tom', 30))
+AS NEW (id,name,age)
+WHERE NOT EXISTS (SELECT * FROM employee WHERE id= NEW.id);
+
+/* ユーザーマスタ */
+/*INSERT INTO m_user SELECT * FROM (VALUES ('1','system@co.jp','ROLE_ADMIN','$2a$10$9bshgMAqtVfwN.xwk2qple1ewxpB89ZFQVgjZk.19x04.V8rtzI9K','システム管理者',TO_DATE('2000-01-01','YYYY-MM-DD'),21,1,1)
+,('2','user@co.jp','ROLE_GENERAL','$2a$10$9bshgMAqtVfwN.xwk2qple1ewxpB89ZFQVgjZk.19x04.V8rtzI9K','ユーザー1',TO_DATE('2000-01-01','YYYY-MM-DD'),21,2,2))AS NEW (id, login_id,role_id, password , user_name , birthday , age, gender , department_id);
+*/
+
+
+/* 部署マスタ */
+INSERT INTO m_department
+SELECT * FROM(VALUES
+(1, 'システム管理部')
+, (2, '営業部'))
+AS NEW (
+department_id
+, department_name)
+WHERE NOT EXISTS (SELECT * FROM employee WHERE department_id= NEW.department_id);
+
+
+
+
+/* 勤怠テーブル */
+/*INSERT INTO t_task
+SELECT * FROM(VALUES
+('user@co.jp', TO_TIMESTAMP('2022/04/19 21:10:00','YYYY/MM/DD HH24:MI:SS'),TO_TIMESTAMP('2022/04/19 21:10:00','YYYY/MM/DD HH24:MI:SS'),TO_TIMESTAMP('2022/04/19 21:10:00','YYYY/MM/DD HH24:MI:SS'),TO_TIMESTAMP('2022/04/19 21:10:00','YYYY/MM/DD HH24:MI:SS'),TO_TIMESTAMP('2022/04/19 21:10:00','YYYY/MM/DD HH24:MI:SS')))
+AS NEW (
+login_id
+,now_time
+  , begin_time 
+  , end_time 
+  , outing_time 
+  , return_time )
+WHERE NOT EXISTS (SELECT * FROM t_task WHERE login_id= NEW.login_id);
+*/
+
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/layout}"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+</head>
+<body class="bg-light">
+  <div layout:fragment="menu" >
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation" id="btn-taskList">
+        <a class="nav-link" th:href="@{'/task/list'}">作業一覧</a>
+      </li>
+      <li role="presentation" id="btn-taskDetail">
+        <a class="nav-link" th:href="@{'/task/detail'}">日時作業入力</a>
+      </li>
+      <li role="presentation" sec:authorize="hasRole('ADMIN')">
+        <a class="nav-link" th:href="@{'/admin'}">アドミン専用</a>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>

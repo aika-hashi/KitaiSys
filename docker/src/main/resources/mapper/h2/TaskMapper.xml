@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Mapperとxmlのマッピング -->
+<mapper namespace="jp.dev.kintaisys.repository.TaskMapper">
+
+	<!-- マッピング定義(勤怠) -->
+	<resultMap type="jp.dev.kintaisys.domain.user.model.Kintai"
+		id="task">
+		<id column="id" property="id" />
+		<result column="login_id" property="loginId" />
+		<result column="now_time" property="nowTime" />
+		<result column="begin_time" property="beginTime" />
+		<result column="end_time" property="endTime" />
+		<result column="outing_time" property="outingTime" />
+		<result column="return_time" property="returnTime" />
+		<result column="break_time" property="breakTime" />
+		<result column="comment" property="comment" />
+	</resultMap>
+
+	<!-- ログインユーザの勤怠情報取得 -->
+	<select id="findOne" resultMap="task">
+		select
+		*
+		from
+		t_task
+		where
+		login_id = #{loginId}
+	</select>
+
+</mapper>

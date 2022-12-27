@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+<title>作業一覧画面</title>
+<!-- 個別CSS読込 -->
+<link rel="stylesheet" th:href="@{/css/user/list.css}">
+<!-- 個別JS読込 -->
+<link rel="stylesheet"
+	th:href="@{/webjars/datatables/css/jquery.dataTables.min.css}">
+<script th:src="@{/webjars/datatables/js/jquery.dataTables.min.js}"
+	defer></script>
+<script th:src="@{/js/task/list.js}" defer></script>
+</head>
+<body>
+	<div layout:fragment="content">
+		<br>
+		<!-- ヘッダ -->
+		<!-- CA -->
+		<form method="post" th:action="@{/list}" th:object=${taskForm}
+			id="task-list-form">
+
+			<!-- ヘッダ -->
+			<!-- 1段落目 -->
+			<div>
+				<table class="table  table-bordered table-hover">
+					<tbody>
+
+						<tr>
+							<!-- プルダウン  -->
+							<td align="left"><select id="month" name="month"
+								onChange="location.href=+value;">
+									<option th:each="i : ${#numbers.sequence(1, 12)}"
+										th:value="${i}" th:text="${i}+ '月'"></option>
+							</select></td>
+							<!-- ここもJS  -->
+							<td><input type="button" id="btn-lastMonth" value="＜" /></td>
+							<td>月</td>
+							<!-- ここもJS  -->
+							<td><input type="button" id="btn-nextMonth" value="＞" /></td>
+
+
+							<!-- ここもJS  -->
+
+							<td align="right"><label for="totalTime">合計時間</label> <input
+								type="time" name="outingTime" />
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- ２段落目 -->
+			<div>
+				<table class="table  table-bordered table-hover"
+					id="month-list-table">
+					<tbody>
+						<tr align="center" class="bg-primary text-white">
+							<th th:text="*{year}+'年'+*{month}+'月'"></th>
+							<th th:text="#{beginTime}"></th>
+							<th th:text="#{endTime}"></th>
+							<th th:text="#{outingTime}"></th>
+							<th th:text="#{returnTime}"></th>
+							<th>作業時間</th>
+						</tr>
+					</tbody>
+
+					<tr th:each="day: *{kintaiList}" id="kintaiList">
+						<td th:text="${day.calenderList}" id="day"></td>
+						<td th:text="${day.beginTime}" id="day"></td>
+						<td th:text="${day.endTime}" id="day"></td>
+						<td th:text="${day.outingTime}" id="day"></td>
+						<td th:text="${day.returnTime}" id="day"></td>
+						<td th:text="${day.totalTime}" id="day"></td>
+					</tr>
+
+					<!-- 日付 -->
+
+					<!--   <tr th:each="day: *{calenderList}" id="calenderList">
+								<td th:text="${day}" id="day"></td>-->
+
+					<!-- </tr>  -->
+
+
+
+					<!-- <tr th:each="day: *{beginTimeList}" id="beginTimeList">
+							  <td th:text="${day}" id="day"></td>
+							</tr>
+					
+								<tr th:each="day: *{endTimeList}" id="endTimeList">
+							  <td th:text="${day}" id="day"></td>
+							</tr>
+								<tr th:each="day: *{outingTimeList}" id="outingTimeList">
+								<td th:text="${day}" id="day"></td>				 
+							</tr>
+								<tr th:each="day: *{returnTimeList}" id="returnTimeList">
+								<td th:text="${day}" id="day"></td>				 
+							</tr>
+								<tr th:each="day: *{totalTimeList}" id="totalTimeList">
+								<td th:text="${day}" id="day"></td>				 
+							</tr>
+							 
+							
+						
+						<!-- 出勤時間 -->
+					<!--  <tbody>
+							 <tr th:each="day: *{beginTimeList}" id="beginTimeList">
+							  <td th:text="${day}" id="day"></td>
+							</tr>
+						</tbody>-->
+					<!-- 退社時間 -->
+					<!--  <tbody>
+							 <tr th:each="day: *{endTimeList}" id="endTimeList">
+							  <td th:text="${day}" id="day"></td>
+							</tr>
+						</tbody>-->
+					<!-- 外出時間 -->
+					<!--  <tbody>
+							 <tr th:each="day: *{outingTimeList}" id="outingTimeList">
+							  <td th:text="${day}" id="day"></td>					
+							</tr>
+						</tbody>-->
+					<!-- 帰社時間 -->
+					<!--  <tbody>
+							 <tr th:each="day: *{returnTimeList}" id="returnTimeList">
+								<td th:text="${day}" id="day"></td>				 
+							</tr>
+						</tbody> -->
+				</table>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

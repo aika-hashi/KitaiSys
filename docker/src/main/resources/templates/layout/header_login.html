@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/layout_login}">
+<head>
+</head>
+<body>
+  <nav layout:fragment="header" class="navbar navbar-inverse navbar-fixed-top navbar-dark bg-primary">
+  <form method="get" th:action="@{/login}">
+        <button class="btn btn-link pull-left navbar-brand" type="submit">
+          勤怠
+        </button>
+</form>
+  </nav>
+</body>
+</html>

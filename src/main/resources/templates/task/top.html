@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/layout}">
+<head>
+  <title>トップ画面</title>
+  <!-- 個別CSS読込 -->
+  <link rel="stylesheet" th:href="@{/css/user/list.css}">
+  <!-- 個別JS読込 -->
+  <link rel="stylesheet" th:href="@{/webjars/datatables/css/jquery.dataTables.min.css}">
+  <script th:src="@{/webjars/datatables/js/jquery.dataTables.min.js}" defer></script>
+  <script th:src="@{/js/task/top.js}" defer></script>
+</head>
+<body>
+　<div layout:fragment="content">
+<br>
+ <form method="post"  th:action="@{/top}" th:object=${taskForm} id="taskTop-form">
+  <!-- 時刻表 -->
+     <!-- 現在時刻 -->
+    <div>
+      <table class="table  table-bordered table-hover">
+         <tbody>
+           <tr align="center">
+            <td><h1 id="nowTime"></h1></td>
+            <!-- <h1 th:text ="${#dates.format(taskForm.nowTime,'HH:mm')}"></h1 -->
+          </tr>
+        </tbody>
+        </table>
+        <!-- ２段落目 -->
+        <!-- RESTボタンエリア -->
+         <table class="table  table-bordered table-hover">
+        <tbody>
+          <tr align="center">
+            <td><input type="button" th:text="#{beginTime}" id="btn-beginTime" class="btn btn-default"/></td>
+            <td><input type="button" th:text="#{endTime}" id="btn-endTime" class="btn btn-default"/></td>
+            <td><input type="button" th:text="#{outingTime}" id="btn-outingTime" class="btn btn-default"/></td>
+            <td><input type="button" th:text="#{returnTime}" id="btn-returnTime" class="btn btn-default"/></td>
+          </tr>
+        </tbody>
+         <!-- 3段落目 -->
+        <!-- 時刻REST反映 -->
+        <tbody>
+          <tr>
+           <!--  <td align="center" th:text="${#dates.format(taskForm.beginTime,'HH:mm')}"></td>
+            <td align="center" th:text="${#dates.format(taskForm.endTime,'HH:mm')}"></td>
+            <td align="center" th:text="${#dates.format(taskForm.outingTime,'HH:mm')}"></td>
+            <td align="center" th:text="${#dates.format(taskForm.returnTime,'HH:mm')}"></td>--> 
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+ 
+ <input type="hidden" value="${taskForm.nowTime}"/>
+ </form>
+ </div>
+</body>
+</html>

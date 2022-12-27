@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/layout}">
+<head>
+</head>
+<body>
+
+<nav layout:fragment="header" class="navbar navbar-inverse navbar-fixed-top navbar-dark bg-primary">
+  <form method="get" th:action="@{/task/top}" th:object=${taskForm}>
+        <button class="btn btn-link pull-left navbar-brand" type="submit">
+          勤怠
+        </button>
+</form>
+<form method="get" th:object=${taskForm} >
+ <font color="white"><p align="center"  th:text="${taskForm.loginId}"></p></font>
+</form>
+<form>
+
+        <button class="btn btn-link center-block navbar-brand" type="submit" value="${taskForm.loginId}">       
+        </button>
+</form>
+      <form method="get" th:action="@{/login}">
+        <button class="btn btn-link pull-left navbar-brand" type="submit">
+          ログアウト
+        </button>
+      </form>
+  </nav>
+</body>
+</html>
